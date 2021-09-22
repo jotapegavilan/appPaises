@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -16,12 +17,70 @@ import android.widget.Toast;
 
 import com.gavilan.apppaises.models.Pais;
 
+import java.util.ArrayList;
+
 
 public class FormActivity extends AppCompatActivity {
 
     EditText txtNombre;
     Spinner spContinentes;
     Button btnGuardar;
+
+    ArrayList<String> arrayContinentes;
+
+    // método para cargar el Spinner
+    public void cargarSpinner(){
+        arrayContinentes = new ArrayList<>();
+        arrayContinentes.add("Seleccione un continente");
+        arrayContinentes.add("África");
+        arrayContinentes.add("América");
+        arrayContinentes.add("Asia");
+        arrayContinentes.add("Europa");
+        arrayContinentes.add("Oceanía");
+
+        // crear un adaptador para el Spinner
+        ArrayAdapter<String> adaptador =
+                new ArrayAdapter<>(this,
+                        android.R.layout.simple_spinner_dropdown_item,
+                        arrayContinentes);
+        spContinentes.setAdapter( adaptador );
+
+    }
+
+    // crear un método que contenga un Toast
+    public void imprimir(String mensaje){
+        Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show();
+    }
+
+    public void agregarPaís(){
+        // aplicar validaciones
+
+        String nombre = txtNombre.getText().toString();
+        String continente = spContinentes.getSelectedItem().toString();
+
+        for( Pais pais : ListadoActivity.arrayList ){
+            // Chile - chile == chile
+            if( pais.getNombrePais().toLowerCase().equals(nombre.toLowerCase()) ){
+                imprimir(nombre+" ya existe!");
+                return;
+            }
+        }
+
+        // validación nombre vacío
+        if( nombre.length() == 0 ){
+            txtNombre.setError("El nombre es obligatorio");
+            return;
+        }
+        // validación de continente válido
+        if( spContinentes.getSelectedItemPosition() == 0  ) {
+            imprimir("Selecciona un continente válido");
+            return;
+        }
+        // se ejecutará solo si no hay errores
+        Pais p = new Pais(nombre,continente);
+        ListadoActivity.arrayList.add(p);
+        imprimir(nombre+" registrado correctamente");
+    }
 
 
     @Override
@@ -33,18 +92,12 @@ public class FormActivity extends AppCompatActivity {
         spContinentes = findViewById(R.id.spContinentes);
         btnGuardar = findViewById(R.id.btnGuardar);
 
+        cargarSpinner();
+
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Pais p = new Pais(txtNombre.getText().toString(),
-                        spContinentes.getSelectedItem().toString());
-
-                ListadoActivity.arrayList.add(p);
-
-                Toast.makeText(FormActivity.this, "País registrado!",
-                        Toast.LENGTH_SHORT).show();
-
-
+                agregarPaís();
             }
         });
     }

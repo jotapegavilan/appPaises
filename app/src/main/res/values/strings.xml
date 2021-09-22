@@ -5,6 +5,8 @@
     <string name="menu_2">Formulario</string>
     <string name="menu_3">Listado</string>
 
+    <string name="btnGuardar">Registrar país</string>
+    <string name="hintNombre">Ingrese nombre del país</string>
 
     <string-array name="continentes">
         <item>América</item>
