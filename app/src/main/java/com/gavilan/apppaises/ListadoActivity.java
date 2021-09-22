@@ -30,16 +30,20 @@ public class ListadoActivity extends AppCompatActivity {
         recyclerPaises.
                 setLayoutManager(new LinearLayoutManager(ListadoActivity.this));
 
+        if( arrayList.size() == 0 ){ // solo si el araylist está vacío
+            paisesDefecto();
+        }
 
+        recyclerPaises.setAdapter(new PaisAdapter(arrayList));
+
+    }
+
+    public void paisesDefecto(){
         arrayList.add(new Pais("Chile","América"));
         arrayList.add(new Pais("España","Europa"));
         arrayList.add(new Pais("China","Asia"));
         arrayList.add(new Pais("Australia","Oceanía"));
         arrayList.add(new Pais("Egipto","África"));
-
-        recyclerPaises.setAdapter(new PaisAdapter(arrayList));
-
-
     }
 
 

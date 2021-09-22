@@ -80,6 +80,10 @@ public class FormActivity extends AppCompatActivity {
         Pais p = new Pais(nombre,continente);
         ListadoActivity.arrayList.add(p);
         imprimir(nombre+" registrado correctamente");
+        // limpiar formulario - dejar la caja de texto vacía y el spinner en la seleccion 0
+        txtNombre.setText("");
+        spContinentes.setSelection(0);
+
     }
 
 

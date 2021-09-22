@@ -1,5 +1,6 @@
 package com.gavilan.apppaises.adapters;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gavilan.apppaises.ListadoActivity;
 import com.gavilan.apppaises.R;
 import com.gavilan.apppaises.models.Pais;
 
@@ -35,9 +37,41 @@ public class PaisAdapter extends RecyclerView.Adapter<PaisAdapter.ViewHolder>{
         return vholder;
     }
 
+    public void eliminarPais( Pais pais, Context context ){
+        AlertDialog.Builder alerta = new AlertDialog.Builder(context);
+        alerta.setTitle("CUIDADO");
+        alerta.setMessage("¿Seguro de eliminar a "+pais.getNombrePais()+"?");
+        alerta.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                ListadoActivity.arrayList.remove(pais); // borrando de array static
+                listaPaises = ListadoActivity.arrayList; // actualizo el arraylocal con los datos
+                // del array static
+                notifyDataSetChanged();
+            }
+        });
+        alerta.setNegativeButton("Cancelar",null);
+        alerta.create();
+        alerta.show();
+    }
+
     @Override
     public void onBindViewHolder(@NonNull PaisAdapter.ViewHolder holder, int position) {
-        holder.cargar(listaPaises.get(position));
+        // variables que usaremos
+        Context context = holder.itemView.getContext();
+        Pais pais = listaPaises.get(position);
+        holder.cargar(pais);
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                eliminarPais(pais, context);
+                return false;
+            }
+        });
+
+
+
 
     }
 
