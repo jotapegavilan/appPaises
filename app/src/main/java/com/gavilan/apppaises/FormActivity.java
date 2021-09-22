@@ -15,7 +15,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.gavilan.apppaises.models.Pais;
-import com.gavilan.apppaises.sqlite.DbPais;
+
 
 public class FormActivity extends AppCompatActivity {
 
@@ -39,15 +39,11 @@ public class FormActivity extends AppCompatActivity {
                 Pais p = new Pais(txtNombre.getText().toString(),
                         spContinentes.getSelectedItem().toString());
 
-                DbPais dbPais = new DbPais(getApplicationContext());
-                long id = dbPais.insertarPais(txtNombre.getText().toString(),
-                        spContinentes.getSelectedItem().toString());
-                if(id > 0)
+                ListadoActivity.arrayList.add(p);
+
                 Toast.makeText(FormActivity.this, "País registrado!",
                         Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(FormActivity.this, "Error al registrar",
-                            Toast.LENGTH_SHORT).show();
+
 
             }
         });

@@ -13,7 +13,6 @@ import android.view.MenuItem;
 
 import com.gavilan.apppaises.adapters.PaisAdapter;
 import com.gavilan.apppaises.models.Pais;
-import com.gavilan.apppaises.sqlite.DbPais;
 
 import java.util.ArrayList;
 
@@ -38,7 +37,7 @@ public class ListadoActivity extends AppCompatActivity {
         arrayList.add(new Pais("Australia","Oceanía"));
         arrayList.add(new Pais("Egipto","África"));
 
-        recyclerPaises.setAdapter(new PaisAdapter(new DbPais(this).getPaises()));
+        recyclerPaises.setAdapter(new PaisAdapter(arrayList));
 
 
     }

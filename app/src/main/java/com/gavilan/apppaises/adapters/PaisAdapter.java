@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gavilan.apppaises.R;
 import com.gavilan.apppaises.models.Pais;
-import com.gavilan.apppaises.sqlite.DbPais;
+
 
 import java.util.ArrayList;
 
@@ -38,35 +38,7 @@ public class PaisAdapter extends RecyclerView.Adapter<PaisAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull PaisAdapter.ViewHolder holder, int position) {
         holder.cargar(listaPaises.get(position));
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                DbPais dbPais = new DbPais(holder.itemView.getContext());
-                Pais pSelected = listaPaises.get(position);
-                AlertDialog.Builder alerta = new AlertDialog.Builder(holder.itemView.getContext());
-                alerta.setTitle("Eliminando").setMessage("¿Seguro de eliminar a "+pSelected.getNombrePais()+"?");
-                alerta.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        int r =dbPais.eliminarPais(pSelected);
-                        if(r == 1){
-                            Toast.makeText(holder.itemView.getContext(), "País eliminado", Toast.LENGTH_SHORT).show();
-                            listaPaises = dbPais.getPaises();
-                            notifyDataSetChanged();
-                        }
-                    }
-                });
-                alerta.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
 
-                    }
-                });
-                alerta.create();
-                alerta.show();
-
-            }
-        });
     }
 
     @Override
@@ -108,12 +80,7 @@ public class PaisAdapter extends RecyclerView.Adapter<PaisAdapter.ViewHolder>{
                 imgContinente.setImageResource(R.drawable.europa);
             }
 
-            imgContinente.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(view.getContext(), p.getNombrePais(), Toast.LENGTH_SHORT).show();
-                }
-            });
+
 
         }
 
