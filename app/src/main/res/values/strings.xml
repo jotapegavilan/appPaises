@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">AppPaises</string>
+
+    <string name="menu_1">Inicio</string>
+    <string name="menu_2">Formulario</string>
+    <string name="menu_3">Listado</string>
+
+
+    <string-array name="continentes">
+        <item>América</item>
+        <item>Asia</item>
+        <item>África</item>
+        <item>Europa</item>
+        <item>Oceanía</item>
+    </string-array>
+
+
+</resources>
