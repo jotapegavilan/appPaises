@@ -2,6 +2,7 @@ package com.gavilan.apppaises.adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gavilan.apppaises.EditActivity;
 import com.gavilan.apppaises.ListadoActivity;
 import com.gavilan.apppaises.R;
 import com.gavilan.apppaises.models.Pais;
@@ -67,6 +69,19 @@ public class PaisAdapter extends RecyclerView.Adapter<PaisAdapter.ViewHolder>{
             public boolean onLongClick(View view) {
                 eliminarPais(pais, context);
                 return false;
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Abrir activity nuevo (EditActivity) -> mandar la información del país
+                // que se clickeo en el recycler
+                Intent intent = new Intent(context, EditActivity.class);
+                //intent.putExtra("dato","Hola mundo android");
+                //intent.putExtra("dato2","Hola mundo android 2");
+                intent.putExtra("objetoPais", pais);
+                context.startActivity(intent);
             }
         });
 

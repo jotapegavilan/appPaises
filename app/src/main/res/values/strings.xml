@@ -8,6 +8,10 @@
     <string name="btnGuardar">Registrar país</string>
     <string name="hintNombre">Ingrese nombre del país</string>
 
+    <string name="tituloedit">Modifica la información del país</string>
+    <string name="btnMod">Modificar</string>
+    <string name="btnCan">Cancelar</string>
+
     <string-array name="continentes">
         <item>América</item>
         <item>Asia</item>
